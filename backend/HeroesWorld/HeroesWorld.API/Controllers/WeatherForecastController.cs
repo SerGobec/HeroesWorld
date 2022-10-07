@@ -1,3 +1,5 @@
+using HeroesWorld.Domain.Repositories;
+using HeroesWorld.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HeroesWorld.API.Controllers
@@ -12,22 +14,35 @@ namespace HeroesWorld.API.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        private IUserRepository _users;
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IUserRepository userRepository)
         {
+            this._users = userRepository;
             _logger = logger;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        public int Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            return this._users.GetAll().ToArray().Length;
+        }
+
+        [HttpGet]
+        [Route("add")]
+        public async Task<IActionResult> AddNew()
+        {
+            this._users.Add(new Domain.Entities.User()
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+                Coints = 0,
+                Diamonds = 0,
+                Expirience = 3,
+                Password = "sdsa",
+                Role = Domain.Enums.UserRole.Admin,
+                TelegramId = null,
+                Username = "sd"
+            });
+            await this._users.SaveChanges();
+            return StatusCode(200);
         }
     }
 }

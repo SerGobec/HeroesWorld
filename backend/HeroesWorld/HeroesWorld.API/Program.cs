@@ -1,11 +1,23 @@
+using HeroesWorld.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+var configbuilder = new ConfigurationBuilder();
+configbuilder.SetBasePath(Directory.GetCurrentDirectory());
+configbuilder.AddJsonFile("appsettings.json");
+var config = configbuilder.Build();
+string connectionString = config.GetConnectionString("DefaultConnection");
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+options.UseNpgsql(
+    connectionString,
+    b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+
+builder.Services.AddInfrastructureServices();
 
 var app = builder.Build();
 
