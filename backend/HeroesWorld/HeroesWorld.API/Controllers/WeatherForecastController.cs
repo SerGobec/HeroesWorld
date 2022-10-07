@@ -1,12 +1,14 @@
+using HeroesWorld.Application.User.Commands.CreateUser;
 using HeroesWorld.Domain.Repositories;
 using HeroesWorld.Infrastructure;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HeroesWorld.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class WeatherForecastController : ControllerBaseWithMediatR
     {
         private static readonly string[] Summaries = new[]
         {
@@ -15,7 +17,7 @@ namespace HeroesWorld.API.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
         private IUserRepository _users;
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IUserRepository userRepository)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IUserRepository userRepository, IMediator mediatR): base(mediatR)
         {
             this._users = userRepository;
             _logger = logger;
@@ -31,18 +33,9 @@ namespace HeroesWorld.API.Controllers
         [Route("add")]
         public async Task<IActionResult> AddNew()
         {
-            this._users.Add(new Domain.Entities.User()
-            {
-                Coints = 0,
-                Diamonds = 0,
-                Expirience = 3,
-                Password = "sdsa",
-                Role = Domain.Enums.UserRole.Admin,
-                TelegramId = null,
-                Username = "sd"
-            });
-            await this._users.SaveChanges();
-            return StatusCode(200);
+
+            await this._mediatR.Send(new CreateUserCommand() { Username = "Melivor"});
+            return Ok();
         }
     }
 }
