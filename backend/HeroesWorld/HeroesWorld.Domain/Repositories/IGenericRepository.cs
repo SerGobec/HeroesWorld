@@ -1,5 +1,6 @@
 ﻿using HeroesWorld.Domain.Entities;
 using HeroesWorld.Domain.Enums;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace HeroesWorld.Domain.Repositories

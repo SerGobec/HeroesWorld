@@ -7,6 +7,8 @@ namespace HeroesWorld.Infrastructure
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,7 +25,6 @@ namespace HeroesWorld.Infrastructure
                 TelegramId = null
             });
         }
-
         public DbSet<User> Users { get; set; }
     }
 }
