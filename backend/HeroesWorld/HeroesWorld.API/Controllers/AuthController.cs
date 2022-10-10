@@ -1,4 +1,6 @@
-﻿using HeroesWorld.Application.Authentification.Commands.Registration;
+﻿using HeroesWorld.Application.Authentification.Commands.Login;
+using HeroesWorld.Application.Authentification.Commands.Registration;
+using HeroesWorld.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,15 +18,15 @@ namespace HeroesWorld.API.Controllers
         {
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("login")]
-        public IActionResult LogIn(string name, string password)
+        public async Task<IActionResult> LogIn([FromBody] LogInModel model)
         {
-            if(name == "a" && password == "a")
-            {
-                var claims = new List<Claim> { new Claim(ClaimTypes.Name, "a"),
-                                                new Claim(ClaimTypes.Role, "admin")};
-                var jwt = new JwtSecurityToken(
+            User user = await this._mediatR.Send(new LoginCommand(model)); 
+
+            var claims = new List<Claim> { new Claim(ClaimTypes.GivenName, user.Username),
+                                           new Claim(ClaimTypes.Role, user.Role.ToString())};
+            var jwt = new JwtSecurityToken(
             issuer: AuthConfigs.ISSUER,
             audience: AuthConfigs.AUDIENCE,
             claims: claims,
@@ -33,8 +35,6 @@ namespace HeroesWorld.API.Controllers
             string finalRoken = new JwtSecurityTokenHandler().WriteToken(jwt);
             this.HttpContext.Response.Cookies.Append("jwtToken", finalRoken);
             return StatusCode(200);
-            }   
-            return NotFound();
         }
 
         [HttpPost]

@@ -1,6 +1,5 @@
 ﻿using HeroesWorld.Domain.Repositories;
 using MediatR;
-using HeroesWorld.Domain.Entities;
 using HeroesWorld.Domain.Enums;
 
 namespace HeroesWorld.Application.Authentification.Commands.Registration
@@ -30,7 +29,7 @@ namespace HeroesWorld.Application.Authentification.Commands.Registration
                 {
                     Username = request.data.Nickname,
                     Email = request.data.Email,
-                    Coints = 100,
+                    Coints = 10000,
                     Diamonds = 10,
                     Expirience = 0,
                     Password = request.data.Password,
