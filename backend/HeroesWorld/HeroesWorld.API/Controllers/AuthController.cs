@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using HeroesWorld.Application.Authentification.Commands.Registration;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -8,8 +10,12 @@ namespace HeroesWorld.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AuthController : Controller
+    public class AuthController : ControllerBaseWithMediatR
     {
+        public AuthController(IMediator mediatR) : base(mediatR)
+        {
+        }
+
         [HttpGet]
         [Route("login")]
         public IActionResult LogIn(string name, string password)
@@ -27,8 +33,16 @@ namespace HeroesWorld.API.Controllers
             string finalRoken = new JwtSecurityTokenHandler().WriteToken(jwt);
             this.HttpContext.Response.Cookies.Append("jwtToken", finalRoken);
             return StatusCode(200);
-            }
+            }   
             return NotFound();
+        }
+
+        [HttpPost]
+        [Route("reg")]
+        public async Task<IActionResult> Registration([FromBody]NewUserDataModel model)
+        {
+            await this._mediatR.Send(new RegistrateNewUserCommand(model));
+            return Ok();
         }
 
         [HttpGet]

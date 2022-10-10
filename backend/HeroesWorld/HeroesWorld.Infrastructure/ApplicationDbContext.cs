@@ -1,5 +1,7 @@
 ﻿using HeroesWorld.Domain.Entities;
+using HeroesWorld.Infrastructure.EntitiesConfigurations;
 using Microsoft.EntityFrameworkCore;
+using HeroesWorld.Domain.Enums;
 
 namespace HeroesWorld.Infrastructure
 {
@@ -7,21 +9,20 @@ namespace HeroesWorld.Infrastructure
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasKey(u => u.Id);
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.Entity<User>().HasData(new User
             {
                 Id = 1,
                 Username = "sd",
+                Email = "",
                 Coints = 100,
                 Diamonds = 10,
                 Expirience = 0,
                 Password = "asd",
-                Role = Domain.Enums.UserRole.Player,
+                Role = UserRole.Admin,
                 TelegramId = null
             });
         }

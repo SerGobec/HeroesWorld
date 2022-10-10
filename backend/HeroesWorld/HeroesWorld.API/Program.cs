@@ -1,3 +1,4 @@
+using HeroesWorld.API;
 using HeroesWorld.API.Middlewares;
 using HeroesWorld.Application;
 using HeroesWorld.Infrastructure;
@@ -28,12 +29,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
         {
             ValidateIssuer = true,
-            ValidateAudience = false,
+            ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = config["Jwt:Issuer"],
-            ValidAudience = config["Jwt:Issuer"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]))
+            ValidIssuer = AuthConfigs.ISSUER,
+            ValidAudience = AuthConfigs.AUDIENCE,
+            IssuerSigningKey = AuthConfigs.GetSymmetricSecurityKey()
         };
     });
 
@@ -41,6 +42,8 @@ builder.Services.AddInfrastructureServices();
 builder.Services.AddApplicationServices();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseMiddleware<JwtMiddleware>();
 

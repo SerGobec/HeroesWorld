@@ -21,6 +21,7 @@ namespace HeroesWorld.Application.User.Commands.CreateUser
             _repository.Add(new Domain.Entities.User()
             {
                 Coints = 0,
+                Email = "asd",
                 Diamonds = 0,
                 Expirience = 0,
                 Password = "sd",
