@@ -34,6 +34,11 @@ namespace HeroesWorld.Infrastructure.Repositories
         {
             return _table.Where(expression);
         }
+        public T? FirstOrDefault(Expression<Func<T, bool>> expression)
+        {
+           return _table.Where(expression).FirstOrDefault();
+        }
+
         public IEnumerable<T> GetAll()
         {
             return _table.ToList();

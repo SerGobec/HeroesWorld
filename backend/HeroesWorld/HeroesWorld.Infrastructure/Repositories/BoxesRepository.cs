@@ -3,9 +3,9 @@ using HeroesWorld.Domain.Repositories;
 
 namespace HeroesWorld.Infrastructure.Repositories
 {
-    public class UserRepository: GenericRepository<User>, IUserRepository
+    public class BoxesRepository : GenericRepository<Chest>, IBoxesRepository
     {
-        public UserRepository(ApplicationDbContext context) : base(context)
+        public BoxesRepository(ApplicationDbContext context) : base(context)
         {
         }
     }
