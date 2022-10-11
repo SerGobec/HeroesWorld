@@ -29,7 +29,7 @@ namespace HeroesWorld.Application.Authentification.Commands.Registration
                 {
                     Username = request.data.Nickname,
                     Email = request.data.Email,
-                    Coints = 10000,
+                    Coins = 10000,
                     Diamonds = 10,
                     Expirience = 0,
                     Password = request.data.Password,

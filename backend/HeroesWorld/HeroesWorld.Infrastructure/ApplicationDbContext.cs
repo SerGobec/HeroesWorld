@@ -13,19 +13,10 @@ namespace HeroesWorld.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserConfiguration());
-            modelBuilder.Entity<User>().HasData(new User
-            {
-                Id = 1,
-                Username = "sd",
-                Email = "",
-                Coints = 100,
-                Diamonds = 10,
-                Expirience = 0,
-                Password = "asd",
-                Role = UserRole.Admin,
-                TelegramId = null
-            });
+            modelBuilder.ApplyConfiguration(new CharacterConfigurations());
+            DefaultDataInitializer.InitDefaultData(modelBuilder);
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<Character> Characters { get; set; }
     }
 }
