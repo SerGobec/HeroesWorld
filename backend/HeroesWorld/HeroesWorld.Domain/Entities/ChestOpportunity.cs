@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HeroesWorld.Domain.Entities
 {
-    public class ChestOportunity : BaseEntity
+    public class ChestOpportunity : BaseEntity
     {
         public PrizeType Prize { get; set; }
         public long Count { get; set; }

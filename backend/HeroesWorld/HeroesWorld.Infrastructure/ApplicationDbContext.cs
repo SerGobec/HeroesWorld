@@ -14,9 +14,11 @@ namespace HeroesWorld.Infrastructure
         {
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new CharacterConfigurations());
+            modelBuilder.ApplyConfiguration(new ChestConfigurations());
             DefaultDataInitializer.InitDefaultData(modelBuilder);
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Character> Characters { get; set; }
+        public DbSet<Chest> Boxes { get; set; }
     }
 }

@@ -9,12 +9,12 @@ namespace HeroesWorld.Domain.Entities
     public class Chest : BaseEntity
     {
         public string Name { get; set; }
-        public string Description { get; set; }
-        public string Base64 { get; set; }
-        public List<ChestOportunity> ChestOportunities { get; set; }
+        public string? Description { get; set; }
+        public string? Base64 { get; set; }
+        public List<ChestOpportunity> ChestOportunities { get; set; }
         public Chest()
         {
-            this.ChestOportunities = new List<ChestOportunity>();
+            this.ChestOportunities = new List<ChestOpportunity>();
         }
     }
 }
