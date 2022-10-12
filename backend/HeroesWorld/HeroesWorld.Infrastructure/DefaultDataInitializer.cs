@@ -1,11 +1,6 @@
 ﻿using HeroesWorld.Domain.Entities;
 using HeroesWorld.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HeroesWorld.Infrastructure
 {
@@ -73,51 +68,51 @@ namespace HeroesWorld.Infrastructure
             };
         }
 
-        public static List<ChestOportunity> GetDefaultChestOp()
+        public static List<ChestOpportunity> GetDefaultChestOp()
         {
-            return new List<ChestOportunity>()
+            return new List<ChestOpportunity>()
             {
-                new ChestOportunity()
+                new ChestOpportunity()
                 {
                     ChestId = 1,
                     Count = 10000,
                     Prize = PrizeType.Coins,
                     Oportunity = 10
                 },
-                new ChestOportunity()
+                new ChestOpportunity()
                 {
                     ChestId = 1,
                     Count = 100000,
                     Prize = PrizeType.Coins,
                     Oportunity = 10
                 },
-                new ChestOportunity()
+                new ChestOpportunity()
                 {
                     ChestId = 1,
                     Count = 20000,
                     Prize = PrizeType.Coins,
                     Oportunity = 10
                 },
-                new ChestOportunity()
+                new ChestOpportunity()
                 {
                     ChestId = 1,
                     Count = 50000,
                     Prize = PrizeType.Coins,
                     Oportunity = 10
                 },
-                new ChestOportunity()
+                new ChestOpportunity()
                 {
                     ChestId = 1,
                     Count = 100,
                     Prize = PrizeType.Diamonds,
                     Oportunity = 30
-                }, new ChestOportunity()
+                }, new ChestOpportunity()
                 {
                     ChestId = 1,
                     Count = 1,
                     Prize = PrizeType.CharacterQuality,
                     Oportunity = 27
-                }, new ChestOportunity()
+                }, new ChestOpportunity()
                 {
                     ChestId = 1,
                     Count = 1,

@@ -11,5 +11,7 @@ namespace HeroesWorld.Domain.Entities
         public int Oportunity { get; set; }
         public long CharacterId { get; set; }
         Character Character { get; set; }
+        public long ChestId { get; set; }
+        Chest Chest { get; set; }
     }
 }
