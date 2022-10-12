@@ -11,6 +11,9 @@ namespace HeroesWorld.Infrastructure
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICharacterRepository, CharacterRepository>();
+            services.AddTransient<IBoxesRepository, BoxesRepository>();
+            services.AddTransient<IChestOpportunitiesRepository, ChestOportunitiesRepository>();
+            services.AddTransient<ISpecialCharactersFBRepository, SpecialCharactersFromBoxRepository>();
         }
     }
 }
