@@ -86,7 +86,7 @@ namespace HeroesWorld.Infrastructure
                     Id = 1,
                     ChestId = 1,
                     Count = 10000,
-                    Prize = PrizeType.Coins,
+                    PrizeType = PrizeType.Coins,
                     Oportunity = 10
                 },
                 new ChestOpportunity()
@@ -94,7 +94,7 @@ namespace HeroesWorld.Infrastructure
                     Id = 2,
                     ChestId = 1,
                     Count = 100000,
-                    Prize = PrizeType.Coins,
+                    PrizeType = PrizeType.Coins,
                     Oportunity = 10
                 },
                 new ChestOpportunity()
@@ -102,7 +102,7 @@ namespace HeroesWorld.Infrastructure
                     Id = 3,
                     ChestId = 1,
                     Count = 20000,
-                    Prize = PrizeType.Coins,
+                    PrizeType = PrizeType.Coins,
                     Oportunity = 10
                 },
                 new ChestOpportunity()
@@ -110,7 +110,7 @@ namespace HeroesWorld.Infrastructure
                     Id = 4,
                     ChestId = 1,
                     Count = 50000,
-                    Prize = PrizeType.Coins,
+                    PrizeType = PrizeType.Coins,
                     Oportunity = 10
                 },
                 new ChestOpportunity()
@@ -118,21 +118,21 @@ namespace HeroesWorld.Infrastructure
                     Id = 5,
                     ChestId = 1,
                     Count = 100,
-                    Prize = PrizeType.Diamonds,
+                    PrizeType = PrizeType.Diamonds,
                     Oportunity = 30
                 }, new ChestOpportunity()
                 {
                     Id = 6,
                     ChestId = 1,
                     Count = 1,
-                    Prize = PrizeType.CharacterQuality,
+                    PrizeType = PrizeType.CharacterQuality,
                     Oportunity = 27
                 }, new ChestOpportunity()
                 {
                     Id = 7,
                     ChestId = 1,
                     Count = 1,
-                    Prize = PrizeType.SpecialCharacter,
+                    PrizeType = PrizeType.SpecialCharacter,
                     Oportunity = 3
                 }
             };

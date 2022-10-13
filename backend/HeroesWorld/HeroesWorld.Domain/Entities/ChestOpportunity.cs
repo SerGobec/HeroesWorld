@@ -9,7 +9,7 @@ namespace HeroesWorld.Domain.Entities
 {
     public class ChestOpportunity : BaseEntity
     {
-        public PrizeType Prize { get; set; }
+        public PrizeType PrizeType { get; set; }
         public long Count { get; set; }
         public int Oportunity { get; set; }
         public long ChestId { get; set; }
