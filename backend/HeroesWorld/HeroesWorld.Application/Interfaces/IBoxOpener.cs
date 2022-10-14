@@ -11,5 +11,6 @@ namespace HeroesWorld.Application.Interfaces
     public interface IBoxOpener
     {
         public Prize OpenChest(Chest chest);
+        public Prize OpenChestById(long ChestId);
     }
 }

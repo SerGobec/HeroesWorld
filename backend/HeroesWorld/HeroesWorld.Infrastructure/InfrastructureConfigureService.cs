@@ -16,10 +16,14 @@ namespace HeroesWorld.Infrastructure
             services.AddTransient<IBoxesRepository, BoxesRepository>();
             services.AddTransient<IChestOpportunitiesRepository, ChestOportunitiesRepository>();
             services.AddTransient<ISpecialCharactersFBRepository, SpecialCharactersFromBoxRepository>();
+            services.AddTransient<ICharactersQualitiesOfBoxRepository, CharactersQualitiesOfBoxRepository>();
 
-            services.AddTransient<IOpportunityChooser, OpportunityChooserService>();
-            services.AddTransient<IBoxOpener, BoxOpenerService>();
+           
             services.AddTransient<ICharacterQualityForBoxChooser, CharacterQualityForBoxChooserService>();
+            services.AddTransient<IOpportunityChooser, OpportunityChooserService>();
+            services.AddTransient<ICharacterByQualityFromBoxChooser, CharacterByQualityFromBoxChooser>();
+            services.AddTransient<IBoxOpener, BoxOpenerService>(); 
+
         }
     }
 }

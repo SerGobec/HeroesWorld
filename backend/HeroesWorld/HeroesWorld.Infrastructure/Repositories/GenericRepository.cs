@@ -43,7 +43,7 @@ namespace HeroesWorld.Infrastructure.Repositories
         {
             return _table.ToList();
         }
-        public T GetById(int id)
+        public T GetById(long id)
         {
             return _table.Find(id);
         }

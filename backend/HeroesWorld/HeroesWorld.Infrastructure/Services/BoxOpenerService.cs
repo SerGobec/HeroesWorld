@@ -9,12 +9,14 @@ namespace HeroesWorld.Infrastructure.Services
     {
         IChestOpportunitiesRepository _opportunities;
         IOpportunityChooser _chooser;
-        IChooserByQuality _chooserByQuality;
-        public BoxOpenerService(IChestOpportunitiesRepository opportunitiesRepository, IOpportunityChooser chooser, IChooserByQuality chooserByQuality)
+        ICharacterByQualityFromBoxChooser _chooserByQuality;
+        IBoxesRepository _boxes;
+        public BoxOpenerService(IChestOpportunitiesRepository opportunitiesRepository, IOpportunityChooser chooser, ICharacterByQualityFromBoxChooser chooserByQuality, IBoxesRepository boxes)
         {
             this._opportunities = opportunitiesRepository;
             _chooser = chooser;
             this._chooserByQuality = chooserByQuality;
+            this._boxes = boxes;
         }
         public Prize OpenChest(Chest chest)
         {
@@ -36,9 +38,23 @@ namespace HeroesWorld.Infrastructure.Services
                     Count = chosenPrize.Count,
                     Base64 = String.Empty
                 };
-                    
+                case PrizeType.CharacterQuality:
+                    Character hero = _chooserByQuality.GetRandomCharacterByQualityForBox(chest);
+                    return new Prize()
+                    {
+                        Name = hero.Name,
+                        Count = 1,
+                        Base64 = hero.PhotoBase64
+                    };
+                 // TODO Add also for special characters
             }
             return null;
+        }
+
+        public Prize OpenChestById(long ChestId)
+        {
+            Chest box = this._boxes.GetById(ChestId);
+            return this.OpenChest(box);
         }
     }
 }

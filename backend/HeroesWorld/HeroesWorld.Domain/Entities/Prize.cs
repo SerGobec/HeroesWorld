@@ -12,7 +12,7 @@ namespace HeroesWorld.Domain.Entities
         PrizeType Type { get; set; }
         public string Name { get; set; }
         public long Count { get; set; }
-        public string Base64 { get; set; }
+        public string? Base64 { get; set; }
 
     }
 }

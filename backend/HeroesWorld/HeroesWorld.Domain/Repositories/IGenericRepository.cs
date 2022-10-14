@@ -7,7 +7,7 @@ namespace HeroesWorld.Domain.Repositories
 {
     public interface IGenericRepository<T> where T : BaseEntity
     {
-        T GetById(int id);
+        T GetById(long id);
         IEnumerable<T> GetAll();
         IEnumerable<T> Find(Expression<Func<T, bool>> expression);
         T? FirstOrDefault(Expression<Func<T, bool>> expression);
