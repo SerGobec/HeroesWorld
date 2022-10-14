@@ -9,10 +9,10 @@ namespace HeroesWorld.Domain.Entities
 {
     public class Prize
     {
-        PrizeType Type { get; set; }
+        public PrizeType Type { get; set; }
         public string Name { get; set; }
         public long Count { get; set; }
         public string? Base64 { get; set; }
-
+        public CharacterQuality Quality { get; set; }
     }
 }

@@ -22,7 +22,8 @@ namespace HeroesWorld.Infrastructure
             services.AddTransient<ICharacterQualityForBoxChooser, CharacterQualityForBoxChooserService>();
             services.AddTransient<IOpportunityChooser, OpportunityChooserService>();
             services.AddTransient<ICharacterByQualityFromBoxChooser, CharacterByQualityFromBoxChooser>();
-            services.AddTransient<IBoxOpener, BoxOpenerService>(); 
+            services.AddTransient<IBoxOpener, BoxOpenerService>();
+            services.AddTransient<ISpecialCharacterChooser, SpecialCharacterChooser>();
 
         }
     }

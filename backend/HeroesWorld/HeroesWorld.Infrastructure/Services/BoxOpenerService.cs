@@ -11,12 +11,21 @@ namespace HeroesWorld.Infrastructure.Services
         IOpportunityChooser _chooser;
         ICharacterByQualityFromBoxChooser _chooserByQuality;
         IBoxesRepository _boxes;
-        public BoxOpenerService(IChestOpportunitiesRepository opportunitiesRepository, IOpportunityChooser chooser, ICharacterByQualityFromBoxChooser chooserByQuality, IBoxesRepository boxes)
+        ISpecialCharacterChooser _specialCharacterChooser;
+        ICharacterRepository _characters;
+        public BoxOpenerService(IChestOpportunitiesRepository opportunitiesRepository,
+                                IOpportunityChooser chooser,
+                                ICharacterByQualityFromBoxChooser chooserByQuality,
+                                IBoxesRepository boxes,
+                                ISpecialCharacterChooser specialCharacterChooser,
+                                ICharacterRepository characters)
         {
             this._opportunities = opportunitiesRepository;
-            _chooser = chooser;
+            this._chooser = chooser;
             this._chooserByQuality = chooserByQuality;
             this._boxes = boxes;
+            this._specialCharacterChooser = specialCharacterChooser;
+            this._characters = characters;
         }
         public Prize OpenChest(Chest chest)
         {
@@ -29,14 +38,16 @@ namespace HeroesWorld.Infrastructure.Services
                 {
                     Name = "Coints",
                     Count = chosenPrize.Count,
-                    Base64 = ""
+                    Base64 = "",
+                    Type = PrizeType.Coins
                 };
                 case PrizeType.Diamonds:
                 return new Prize()
                 {
                     Name = "Diamonds",
                     Count = chosenPrize.Count,
-                    Base64 = String.Empty
+                    Base64 = String.Empty,
+                    Type = PrizeType.Diamonds
                 };
                 case PrizeType.CharacterQuality:
                     Character hero = _chooserByQuality.GetRandomCharacterByQualityForBox(chest);
@@ -44,9 +55,26 @@ namespace HeroesWorld.Infrastructure.Services
                     {
                         Name = hero.Name,
                         Count = 1,
-                        Base64 = hero.PhotoBase64
+                        Base64 = hero.PhotoBase64,
+                        Type = PrizeType.CharacterQuality,
+                        Quality = hero.Quality
                     };
-                 // TODO Add also for special characters
+                    
+                case PrizeType.SpecialCharacter:
+                    CharacterOfBox specialHero = _specialCharacterChooser.GetSpecialCharacterFromBox(chest);
+                    Character? character = this._characters.FirstOrDefault(el => el.Id == specialHero.CharacterId);
+                    if(character != null)
+                    {
+                        return new Prize()
+                        {
+                            Count = 1,
+                            Name = character.Name,
+                            Quality = character.Quality,
+                            Type = PrizeType.SpecialCharacter,
+                            Base64 = character.PhotoBase64
+                        };
+                    }
+                    break;
             }
             return null;
         }
