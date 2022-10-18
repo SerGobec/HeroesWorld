@@ -1,11 +1,6 @@
 ﻿using HeroesWorld.Domain.Entities;
 using HeroesWorld.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HeroesWorld.Infrastructure
 {
@@ -16,6 +11,9 @@ namespace HeroesWorld.Infrastructure
             modelBuilder.Entity<User>().HasData(GetDefaultUsers());
             modelBuilder.Entity<Character>().HasData(GetDefaultCharacters());
             modelBuilder.Entity<Chest>().HasData(GetDefaultChest());
+            modelBuilder.Entity<ChestOpportunity>().HasData(GetDefaultChestOp());
+            modelBuilder.Entity<CharacterOfBox>().HasData(GetSpecCharacterOfBoxes());
+            modelBuilder.Entity<CharacterQualityOfBox>().HasData(GetCharacterQualityOfBoxes());
         }
         public static List<User> GetDefaultUsers()
         {
@@ -36,21 +34,27 @@ namespace HeroesWorld.Infrastructure
         {
             return new List<Character> { new Character()
                 {
-                Id = 100,
+                Id = 1,
                 ChanceOfDropping = 40,
                 Name = "Shikamaru",
                 Quality = CharacterQuality.Ordinary
                 }, new Character()
                 {
-                    Id = 101,
+                    Id = 2,
                     ChanceOfDropping = 30,
                     Name = "Saitama",
                     Quality = CharacterQuality.Powerful
                 }, new Character()
                 {
-                    Id = 102,
+                    Id = 3,
                     Name = "Jojo",
                     ChanceOfDropping = 2,
+                    Quality = CharacterQuality.Mithical
+                },
+                new Character() {
+                    Id = 4,
+                    Name = "Sasuke",
+                    ChanceOfDropping = 1,
                     Quality = CharacterQuality.Mithical
                 }
             };
@@ -73,56 +77,98 @@ namespace HeroesWorld.Infrastructure
             };
         }
 
-        public static List<ChestOportunity> GetDefaultChestOp()
+        public static List<ChestOpportunity> GetDefaultChestOp()
         {
-            return new List<ChestOportunity>()
+            return new List<ChestOpportunity>()
             {
-                new ChestOportunity()
+                new ChestOpportunity()
                 {
+                    Id = 1,
                     ChestId = 1,
                     Count = 10000,
-                    Prize = PrizeType.Coins,
+                    PrizeType = PrizeType.Coins,
                     Oportunity = 10
                 },
-                new ChestOportunity()
+                new ChestOpportunity()
                 {
+                    Id = 2,
                     ChestId = 1,
                     Count = 100000,
-                    Prize = PrizeType.Coins,
+                    PrizeType = PrizeType.Coins,
                     Oportunity = 10
                 },
-                new ChestOportunity()
+                new ChestOpportunity()
                 {
+                    Id = 3,
                     ChestId = 1,
                     Count = 20000,
-                    Prize = PrizeType.Coins,
+                    PrizeType = PrizeType.Coins,
                     Oportunity = 10
                 },
-                new ChestOportunity()
+                new ChestOpportunity()
                 {
+                    Id = 4,
                     ChestId = 1,
                     Count = 50000,
-                    Prize = PrizeType.Coins,
+                    PrizeType = PrizeType.Coins,
                     Oportunity = 10
                 },
-                new ChestOportunity()
+                new ChestOpportunity()
                 {
+                    Id = 5,
                     ChestId = 1,
                     Count = 100,
-                    Prize = PrizeType.Diamonds,
+                    PrizeType = PrizeType.Diamonds,
                     Oportunity = 30
-                }, new ChestOportunity()
+                }, new ChestOpportunity()
                 {
+                    Id = 6,
                     ChestId = 1,
                     Count = 1,
-                    Prize = PrizeType.CharacterQuality,
+                    PrizeType = PrizeType.CharacterQuality,
                     Oportunity = 27
-                }, new ChestOportunity()
+                }, new ChestOpportunity()
                 {
+                    Id = 7,
                     ChestId = 1,
                     Count = 1,
-                    Prize = PrizeType.SpecialCharacter,
+                    PrizeType = PrizeType.SpecialCharacter,
                     Oportunity = 3
+                }
+            };
+        }
+
+        public static List<CharacterOfBox> GetSpecCharacterOfBoxes()
+        {
+            return new List<CharacterOfBox>()
+            {
+                new CharacterOfBox()
+                {
+                    Id = 1,
+                    ChestId = 1,
+                    CharacterId = 4,
+                    Oportunity = 1
+                }
+            };
+        }
+
+        public static List<CharacterQualityOfBox> GetCharacterQualityOfBoxes()
+        {
+            return new List<CharacterQualityOfBox>()
+            {
+                new CharacterQualityOfBox()
+                {
+                      ChestId = 1,
+                      Id = 1,
+                      Opportunity = 30,
+                      Quality = CharacterQuality.Ordinary
+                },
+                new CharacterQualityOfBox()
+                {
+                    ChestId = 1,
+                    Id = 2,
+                    Opportunity = 10,
+                    Quality = CharacterQuality.Powerful
                 }
             };
         }

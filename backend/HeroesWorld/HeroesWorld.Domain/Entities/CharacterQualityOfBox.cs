@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HeroesWorld.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace HeroesWorld.Domain.Entities
 {
-    public class CharacterOfBox : BaseEntity
+    public class CharacterQualityOfBox : BaseEntity
     {
-        public int Oportunity { get; set; }
-        public long CharacterId { get; set; }
-        Character Character { get; set; }
+
+        public CharacterQuality Quality { get; set; }
+        public int Opportunity { get; set; }
         public long ChestId { get; set; }
         Chest Chest { get; set; }
+        
     }
 }
