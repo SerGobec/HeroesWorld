@@ -12,9 +12,13 @@ namespace HeroesWorld.Domain.Entities
         public string? Description { get; set; }
         public string? Base64 { get; set; }
         public List<ChestOpportunity> ChestOportunities { get; set; }
+        public List<CharacterOfBox>? SpecialCharacters { get; set; }
+        public List<CharacterQualityOfBox>? Qualities { get; set; }
         public Chest()
         {
             this.ChestOportunities = new List<ChestOpportunity>();
+            SpecialCharacters = new List<CharacterOfBox>();
+            Qualities = new List<CharacterQualityOfBox>();
         }
     }
 }

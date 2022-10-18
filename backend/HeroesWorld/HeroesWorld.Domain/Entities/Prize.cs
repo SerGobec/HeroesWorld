@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace HeroesWorld.Domain.Entities
 {
-    public class ChestOpportunity : BaseEntity
+    public class Prize
     {
-        public PrizeType PrizeType { get; set; }
+        public PrizeType Type { get; set; }
+        public string Name { get; set; }
         public long Count { get; set; }
-        public int Oportunity { get; set; }
-        public long ChestId { get; set; }
-        public Chest Chest { get; set; }
+        public string? Base64 { get; set; }
+        public CharacterQuality Quality { get; set; }
     }
 }
